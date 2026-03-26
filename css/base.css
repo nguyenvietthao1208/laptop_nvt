@@ -1,0 +1,7 @@
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',sans-serif;background:#090c13;color:#e2e8f0;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+:root{--sf:#10141f;--cd:#161d2e;--bd:#1e2a42;--ac:#f97316;--ac2:#ea580c;--rd:#ef4444;--yw:#eab308;--pu:#a855f7;--gn:#22c55e;--tx:#e2e8f0;--mt:#8899b8;--dm:#475569;--r:10px}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2a3555;border-radius:2px}
+a{text-decoration:none;color:inherit}button,input,select{font-family:inherit;cursor:pointer}
+img{will-change:transform}.pc{will-change:transform}.cdr,.mbg,.ck-modal{will-change:transform,opacity}

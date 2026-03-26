@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LaptopNVT – Laptop Chính Hãng Hải Phòng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/layout.css"/>
+<link rel="stylesheet" href="css/ui.css"/>
+</head>
+<body>
+<div class="topbar">
+  <div class="tbl"><span>&#128205; Hải Phòng</span><span>&#128222; 0794 105 811</span><span>&#128336; 8:00–21:00</span></div>
+  <div class="tbr"><a href="#">Tin tức</a><a href="#">Bảo hành</a><a href="#">Tư vấn online</a><a href="#">Hỗ trợ</a></div>
+</div>
+
+<header class="hdr">
+  <div class="logo" style="cursor:pointer" id="btnLogo"><div class="logo-i">&#128187;</div>Laptop<b>NVT</b></div>
+  <div class="sw"><input class="si" id="si" placeholder="Tìm laptop, thương hiệu, cấu hình..."/><button class="sb2" id="btnSearch">&#128269;</button></div>
+  <div class="ha">
+    <button class="hbtn" id="btnCart"><span class="hi">&#128722;</span><span>Giỏ</span><span class="cn" id="cartBadge">0</span></button>
+    <div id="navAuthArea"></div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="ni on" data-cat="all">&#128187; Tất cả</div>
+  <div class="ni" data-cat="gaming">&#127918; Gaming</div>
+  <div class="ni" data-cat="ultrabook">&#10024; Ultrabook</div>
+  <div class="ni" data-cat="workstation">&#128188; Workstation</div>
+  <div class="ni" data-cat="creator">&#127912; Đồ Hoạ</div>
+  <div class="ni" data-cat="student">&#127891; Sinh Viên</div>
+  <div class="ni" data-cat="office">&#127970; Văn Phòng</div>
+</nav>
+
+<div id="viewList">
+<div class="bwrap">
+  <div style="position:relative;overflow:hidden;border-radius:14px;width:100%">
+    <div id="fsTrack" style="overflow:hidden;border-radius:14px;width:100%"></div>
+    <button id="fsArrL" class="fs-arr fs-arr-l">&#8249;</button>
+    <button id="fsArrR" class="fs-arr fs-arr-r">&#8250;</button>
+    <div id="fsDots" class="fs-dots"></div>
+    <div class="fs-progress"><div class="fs-progress-bar" id="fsProgressBar"></div></div>
+  </div>
+</div>
+
+<div class="pr">
+  <div class="prc"><div class="pri">&#9989;</div><div><div class="prt">Chính hãng 100%</div><div class="prs">BH nhà sản xuất</div></div></div>
+  <div class="prc"><div class="pri">&#128666;</div><div><div class="prt">Ship miễn phí</div><div class="prs">Toàn quốc</div></div></div>
+  <div class="prc"><div class="pri">&#128260;</div><div><div class="prt">Đổi trả 7 ngày</div><div class="prs">Không lý do</div></div></div>
+  <div class="prc"><div class="pri">&#128179;</div><div><div class="prt">Trả góp 0%</div><div class="prs">Lên đến 24 tháng</div></div></div>
+</div>
+
+<div class="qc">
+  <div class="qci on" data-cat="all">&#128187; Tất cả</div>
+  <div class="qci" data-cat="gaming">&#127918; Gaming</div>
+  <div class="qci" data-cat="ultrabook">&#10024; Ultrabook</div>
+  <div class="qci" data-cat="workstation">&#128188; Workstation</div>
+  <div class="qci" data-cat="creator">&#127912; Đồ Hoạ</div>
+  <div class="qci" data-cat="student">&#127891; Sinh Viên</div>
+  <div class="qci" data-cat="office">&#127970; Văn Phòng</div>
+</div>
+
+<div class="bstrip"><div class="bsi">
+  <span class="bl2">Apple</span><span class="bl2">ASUS ROG</span><span class="bl2">Dell XPS</span><span class="bl2">Lenovo Legion</span><span class="bl2">HP Omen</span><span class="bl2">MSI Titan</span><span class="bl2">Razer Blade</span><span class="bl2">Acer Predator</span><span class="bl2">Samsung</span><span class="bl2">LG Gram</span><span class="bl2">Gigabyte AORUS</span><span class="bl2">Microsoft Surface</span><span class="bl2">Alienware</span><span class="bl2">Huawei MateBook</span>
+  <span class="bl2">Apple</span><span class="bl2">ASUS ROG</span><span class="bl2">Dell XPS</span><span class="bl2">Lenovo Legion</span><span class="bl2">HP Omen</span><span class="bl2">MSI Titan</span><span class="bl2">Razer Blade</span><span class="bl2">Acer Predator</span><span class="bl2">Samsung</span><span class="bl2">LG Gram</span><span class="bl2">Gigabyte AORUS</span><span class="bl2">Microsoft Surface</span><span class="bl2">Alienware</span><span class="bl2">Huawei MateBook</span>
+</div></div>
+
+<div class="mwrap">
+  <aside class="sbwrap">
+    <div class="sbs"><div class="sbt">Thương hiệu</div><div class="sblist">
+      <div class="sbi on" data-brand="all">Tất cả<span class="sc" id="cAll">0</span></div>
+      <div class="sbi" data-brand="Apple">Apple<span class="sc" id="cApple">0</span></div>
+      <div class="sbi" data-brand="ASUS">ASUS<span class="sc" id="cASUS">0</span></div>
+      <div class="sbi" data-brand="Dell">Dell<span class="sc" id="cDell">0</span></div>
+      <div class="sbi" data-brand="Lenovo">Lenovo<span class="sc" id="cLenovo">0</span></div>
+      <div class="sbi" data-brand="HP">HP<span class="sc" id="cHP">0</span></div>
+      <div class="sbi" data-brand="MSI">MSI<span class="sc" id="cMSI">0</span></div>
+      <div class="sbi" data-brand="Razer">Razer<span class="sc" id="cRazer">0</span></div>
+      <div class="sbi" data-brand="Acer">Acer<span class="sc" id="cAcer">0</span></div>
+      <div class="sbi" data-brand="Samsung">Samsung<span class="sc" id="cSamsung">0</span></div>
+      <div class="sbi" data-brand="LG">LG<span class="sc" id="cLG">0</span></div>
+      <div class="sbi" data-brand="Gigabyte">Gigabyte<span class="sc" id="cGigabyte">0</span></div>
+      <div class="sbi" data-brand="Microsoft">Microsoft<span class="sc" id="cMicrosoft">0</span></div>
+      <div class="sbi" data-brand="Alienware">Alienware<span class="sc" id="cAlienware">0</span></div>
+      <div class="sbi" data-brand="Huawei">Huawei<span class="sc" id="cHuawei">0</span></div>
+    </div></div>
+    <div class="sbs"><div class="sbt">Khoảng giá</div><div class="cblist">
+      <label class="cbi"><input type="checkbox" data-price="0-10" class="pcb2"/><span class="cbl">Dưới 10 triệu</span></label>
+      <label class="cbi"><input type="checkbox" data-price="10-20" class="pcb2"/><span class="cbl">10 – 20 triệu</span></label>
+      <label class="cbi"><input type="checkbox" data-price="20-35" class="pcb2"/><span class="cbl">20 – 35 triệu</span></label>
+      <label class="cbi"><input type="checkbox" data-price="35-60" class="pcb2"/><span class="cbl">35 – 60 triệu</span></label>
+      <label class="cbi"><input type="checkbox" data-price="60-999" class="pcb2"/><span class="cbl">Trên 60 triệu</span></label>
+    </div></div>
+    <div class="sbs"><div class="sbt">CPU</div><div class="cblist">
+      <label class="cbi"><input type="checkbox" data-cpu="Core i5" class="ccb"/><span class="cbl">Intel Core i5</span></label>
+      <label class="cbi"><input type="checkbox" data-cpu="Core i7" class="ccb"/><span class="cbl">Intel Core i7</span></label>
+      <label class="cbi"><input type="checkbox" data-cpu="Core i9" class="ccb"/><span class="cbl">Intel Core i9</span></label>
+      <label class="cbi"><input type="checkbox" data-cpu="Core Ultra" class="ccb"/><span class="cbl">Core Ultra</span></label>
+      <label class="cbi"><input type="checkbox" data-cpu="Ryzen" class="ccb"/><span class="cbl">AMD Ryzen</span></label>
+      <label class="cbi"><input type="checkbox" data-cpu="Apple M" class="ccb"/><span class="cbl">Apple Silicon</span></label>
+    </div></div>
+    <div class="sbs"><div class="sbt">GPU</div><div class="cblist">
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 5090" class="gcb"/><span class="cbl">RTX 5090</span></label>
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 5080" class="gcb"/><span class="cbl">RTX 5080</span></label>
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 5070" class="gcb"/><span class="cbl">RTX 5070</span></label>
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 4090" class="gcb"/><span class="cbl">RTX 4090</span></label>
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 4080" class="gcb"/><span class="cbl">RTX 4080</span></label>
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 4070" class="gcb"/><span class="cbl">RTX 4070</span></label>
+      <label class="cbi"><input type="checkbox" data-gpu="RTX 4060" class="gcb"/><span class="cbl">RTX 4060</span></label>
+    </div></div>
+    <div class="sbs"><div class="sbt">RAM</div><div class="cblist">
+      <label class="cbi"><input type="checkbox" data-ram="8" class="rcb"/><span class="cbl">8 GB</span></label>
+      <label class="cbi"><input type="checkbox" data-ram="16" class="rcb"/><span class="cbl">16 GB</span></label>
+      <label class="cbi"><input type="checkbox" data-ram="32" class="rcb"/><span class="cbl">32 GB</span></label>
+      <label class="cbi"><input type="checkbox" data-ram="64" class="rcb"/><span class="cbl">64 GB+</span></label>
+    </div></div>
+    <button class="bclr" id="btnClr">&#128260; Xoá bộ lọc</button>
+  </aside>
+  <div class="pa">
+    <div class="ph">
+      <div><span class="ptit" id="paTitle">Tất cả Laptop</span>&nbsp;<span class="pcnt" id="paCnt"></span></div>
+      <div class="sw3">
+        <span class="sl">Sắp xếp:</span>
+        <select class="ss" id="sortSel"><option value="df">Mặc định</option><option value="pa">Giá tăng dần</option><option value="pd">Giá giảm dần</option><option value="rt">Đánh giá cao</option><option value="nm">Tên A–Z</option></select>
+        <div class="vb"><button class="vbt on" id="btnGV">&#8862;</button><button class="vbt" id="btnLV">&#9776;</button></div>
+      </div>
+    </div>
+    <div class="pgrid" id="productGrid"></div>
+    <div class="pagi" id="pagi"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="fg4">
+    <div><div class="flogo"><div style="width:20px;height:20px;background:var(--ac);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0">&#128187;</div>Laptop<b>NVT</b></div><p class="fdesc">Chuyên laptop chính hãng Hải Phòng. Bảo hành tận tay, đổi trả 7 ngày, hỗ trợ trọn đời.</p><div class="fbgs"><span class="fbg">&#9989; Chính hãng</span><span class="fbg">&#128666; Free ship</span><span class="fbg">&#128260; 7 ngày đổi</span><span class="fbg">&#128179; 0% lãi</span></div></div>
+    <div><div class="fct">Danh mục</div><ul class="fls"><li><a href="#">Gaming</a></li><li><a href="#">Ultrabook</a></li><li><a href="#">Workstation</a></li><li><a href="#">Đồ Hoạ</a></li><li><a href="#">Sinh viên</a></li><li><a href="#">Văn phòng</a></li></ul></div>
+    <div><div class="fct">Hỗ trợ</div><ul class="fls"><li><a href="#">Bảo hành & Sửa</a></li><li><a href="#">Đổi trả</a></li><li><a href="#">Trạng thái đơn</a></li><li><a href="#">Tư vấn cấu hình</a></li><li><a href="#">Trả góp 0%</a></li></ul></div>
+    <div><div class="fct">Liên hệ</div><ul class="fls"><li><a href="tel:0794105811">&#128222; 0794 105 811</a></li><li><a href="/cdn-cgi/l/email-protection#8ce2ebf9f5e9e2fae5e9f8f8e4ede3bdbebcb4ccebe1ede5e0a2efe3e1">&#9993; <span class="__cf_email__" data-cfemail="117f766468747f677874656579707e2023212951767c70787d3f727e7c">[email&#160;protected]</span></a></li><li><a href="#">&#128205; Hải Phòng, Việt Nam</a></li><li><a href="#">&#128336; 8:00–21:00</a></li></ul></div>
+  </div>
+  <div class="fbot"><span>&copy; 2025 LaptopNVT – Nguyễn Việt Thảo</span><span>Made with &#10084; in Hải Phòng &#127475;&#127475;</span></div>
+</footer>
+</div><!-- /viewList -->
+
+<!-- ═══ PRODUCT DETAIL VIEW ═══ -->
+<div id="viewDetail">
+  <div class="pd-wrap">
+    <div class="bc" id="pdBreadcrumb"></div>
+    <!-- Admin bar (only visible to admin) -->
+    <div class="pd-admin-bar" id="pdAdminBar" style="display:none">
+      <div class="pd-admin-label">&#9881; Chế độ Admin &mdash; Bạn đang xem trang chi tiết sản phẩm</div>
+      <div class="pd-admin-btns">
+        <button class="pd-admin-btn pd-edit-btn" id="btnPdEdit">&#9999; Chỉnh sửa sản phẩm</button>
+        <button class="pd-admin-btn pd-del-btn" id="btnPdDelete">&#128465; Xoá</button>
+      </div>
+    </div>
+    <!-- Inline edit form -->
+    <div class="pd-edit-form" id="pdEditForm">
+      <div class="pd-ef-title">&#9999; Chỉnh sửa sản phẩm</div>
+      <div class="fg2"><div class="fg"><label>Tên SP *</label><input class="fi" id="efNm" placeholder="MacBook Pro 14"/></div><div class="fg"><label>Thương hiệu *</label><input class="fi" id="efBr" placeholder="Apple"/></div></div>
+      <div class="fg2">
+        <div class="fg"><label>Danh mục</label><select class="fsel" id="efCt"><option value="gaming">Gaming</option><option value="ultrabook">Ultrabook</option><option value="workstation">Workstation</option><option value="creator">Đồ Hoạ</option><option value="student">Sinh Viên</option><option value="office">Văn Phòng</option></select></div>
+        <div class="fg"><label>Badge</label><select class="fsel" id="efBdg"><option value="">Không</option><option value="new">Mới</option><option value="sale">Giảm</option><option value="hot">Hot</option><option value="2025">2025</option></select></div>
+      </div>
+      <div class="fg2"><div class="fg"><label>Giá bán *</label><input class="fi" id="efPr" type="number"/></div><div class="fg"><label>Giá gốc</label><input class="fi" id="efWs" type="number" placeholder="Để trống nếu không"/></div></div>
+      <div class="fg2"><div class="fg"><label>Đánh giá (1–5)</label><input class="fi" id="efRt" type="number" min="1" max="5" step="0.1"/></div><div class="fg"><label>Lượt đánh giá</label><input class="fi" id="efRv" type="number"/></div></div>
+      <div class="fg"><label>Thông số kỹ thuật (phân cách dấu phẩy)</label><input class="fi" id="efSp" placeholder="Core i7-13700H, 16GB DDR5, 512GB SSD, RTX 4070 8GB, 15.6&quot; FHD 144Hz"/></div>
+      <div class="fg"><label>Mô tả sản phẩm</label><textarea class="fi" id="efDesc" rows="3" style="resize:vertical" placeholder="Mô tả chi tiết về sản phẩm..."></textarea></div>
+      <div class="fg"><label>URL ảnh chính</label><input class="fi" id="efIm" placeholder="https://..."/></div>
+      <div class="fg"><label>Emoji icon</label><input class="fi" id="efIc" maxlength="4" placeholder="&#128187;"/></div>
+      <div class="ge" id="efErr"></div>
+      <div style="display:flex;gap:.6rem;margin-top:.5rem">
+        <button class="bsv" id="btnEfSave" style="flex:1;padding:.68rem">&#128190; Lưu thay đổi</button>
+        <button class="bce" id="btnEfCancel" style="padding:.68rem 1rem">Huỷ</button>
+      </div>
+    </div>
+    <!-- Detail content -->
+    <div id="pdContent"></div>
+  </div>
+</div>
+
+<!-- COMPARE BAR -->
+<div class="cmpbar" id="cmpbar">
+  <div class="cmpl" id="cmpl"><span class="cmpt">&#9878; So sánh:</span></div>
+  <div style="display:flex;gap:.45rem;flex-shrink:0">
+    <button class="cmpcl" id="btnCmpClear">Xoá</button>
+    <button class="cmpbtn" id="btnCmpGo" disabled>So sánh &#8594;</button>
+  </div>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="cmp-modal" id="mCmp">
+  <div class="cmp-box">
+    <div class="cmp-hdr"><span class="cmp-hdl">&#9878; So sánh sản phẩm</span><button class="cmp-x" id="btnCmpClose">&#10005;</button></div>
+    <div class="cmp-tbl" id="cmpContent"></div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="bdrop" id="bdrop"></div>
+<div class="cdr" id="cdr">
+  <div class="cdh"><div class="cdt">&#128722; Giỏ hàng</div><button class="cdc" id="btnCC">&#10005;</button></div>
+  <div class="cdb" id="cdb"></div>
+  <div class="cdf" id="cdf" style="display:none">
+    <div class="cto"><span class="ctol">Tổng:</span><span class="ctoa" id="cTotal"></span></div>
+    <button class="btco" id="btnCheckout">&#9989; Thanh toán ngay &#8594;</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="mbg" id="mLogin">
+  <div class="md"><div class="mdh"><span class="mdl">LaptopNVT</span><button class="mdx" data-close="mLogin">&#10005;</button></div>
+  <div class="mdb">
+    <div class="mdt">Đăng nhập</div>
+    <p class="mds">Chưa có tài khoản? <a id="toReg">Đăng ký ngay</a></p>
+    <button class="bts" id="btnLoginGoogle" style="display:none;background:#fff;color:#333;border:1.5px solid #dadce0;margin-bottom:.65rem;gap:.5rem">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" style="flex-shrink:0;vertical-align:middle;margin-right:.4rem"/>Đăng nhập bằng Google
+    </button>
+    <div id="loginDivider" style="display:none;align-items:center;gap:.55rem;margin-bottom:.75rem">
+      <div style="flex:1;height:1px;background:var(--bd)"></div>
+      <span style="font-size:.7rem;color:var(--dm)">hoặc dùng email</span>
+      <div style="flex:1;height:1px;background:var(--bd)"></div>
+    </div>
+    <div class="fg"><label>Email hoặc tên đăng nhập</label><input class="fi" id="lUser" placeholder="Email hoặc tên đăng nhập"/><div class="fe" id="lUE"></div></div>
+    <div class="fg"><label>Mật khẩu</label><input class="fi" id="lPass" type="password" placeholder="Nhập mật khẩu"/>
+      <div style="text-align:right;margin-top:.25rem"><a id="btnForgotPwd" style="font-size:.68rem;color:var(--ac);cursor:pointer;display:none">Quên mật khẩu?</a></div>
+      <div class="fe" id="lPE"></div>
+    </div>
+    <div class="ge" id="lGE"></div>
+    <button class="bts" id="btnLogin">Đăng nhập</button>
+  </div></div>
+</div>
+
+<!-- REGISTER -->
+<div class="mbg" id="mReg">
+  <div class="md"><div class="mdh"><span class="mdl">LaptopNVT</span><button class="mdx" data-close="mReg">&#10005;</button></div>
+  <div class="mdb"><div class="mdt">Tạo tài khoản</div><p class="mds">Đã có tài khoản? <a id="toLgn">Đăng nhập</a></p>
+  <div class="fg2"><div class="fg"><label>Họ</label><input class="fi" id="rLn" placeholder="Nguyễn"/><div class="fe" id="rLE"></div></div><div class="fg"><label>Tên</label><input class="fi" id="rFn" placeholder="Văn A"/><div class="fe" id="rFE"></div></div></div>
+  <div class="fg"><label>Tên đăng nhập</label><input class="fi" id="rUn" placeholder="vd: nguyen123"/><div class="fe" id="rUE"></div></div>
+  <div class="fg"><label>Email</label><input class="fi" id="rEm" type="email" placeholder="email@example.com"/><div class="fe" id="rEE"></div></div>
+  <div class="fg"><label>Số điện thoại</label><input class="fi" id="rPh" type="tel" placeholder="0xxx xxx xxx"/><div class="fe" id="rPhE"></div></div>
+  <div class="fg"><label>Mật khẩu</label><input class="fi" id="rPw" type="password" placeholder="Tối thiểu 6 ký tự"/><div class="fe" id="rPwE"></div></div>
+  <div class="fg"><label>Xác nhận mật khẩu</label><input class="fi" id="rPw2" type="password" placeholder="Nhập lại"/><div class="fe" id="rPw2E"></div></div>
+  <button class="bts" id="btnReg">Tạo tài khoản</button></div></div>
+</div>
+
+
+<!-- EMAIL VERIFY NOTICE MODAL -->
+<div class="mbg" id="mVerifyNotice">
+  <div class="md" style="max-width:400px;text-align:center">
+    <div class="mdb" style="padding:2rem 1.5rem">
+      <div style="font-size:3.5rem;margin-bottom:1rem">&#128140;</div>
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:.5rem">Xác nhận email của bạn</div>
+      <p style="font-size:.82rem;color:var(--mt);line-height:1.75;margin-bottom:1.2rem">
+        Chúng tôi đã gửi email xác nhận đến<br>
+        <b style="color:var(--ac)" id="verifyEmailAddr"></b><br><br>
+        Vui lòng kiểm tra hộp thư và <b>thư rác (Spam)</b>,<br>
+        sau đó bấm vào link xác nhận trong email.<br><br>
+        <span style="font-size:.75rem;color:var(--dm)">Sau khi xác nhận, bạn sẽ được đăng nhập tự động.</span>
+      </p>
+      <!-- Polling indicator -->
+      <div id="verifyPolling" style="display:flex;align-items:center;justify-content:center;gap:.55rem;margin-bottom:1rem;font-size:.78rem;color:var(--mt)">
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--ac);display:inline-block;animation:pulse 1.2s ease-in-out infinite;flex-shrink:0"></span>
+        Đang chờ bạn xác nhận...
+      </div>
+      <div style="display:flex;gap:.55rem;flex-direction:column">
+        <button class="bts" id="btnResendVerify" style="background:transparent;border:1.5px solid var(--bd);color:var(--mt);margin-top:0">
+          &#128231; Gửi lại email xác nhận
+        </button>
+        <button class="bts" id="btnCancelVerify" style="background:transparent;border:1px solid var(--bd);color:var(--dm);font-size:.76rem;padding:.5rem;margin-top:0">
+          Huỷ
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="mbg" id="mAdmin" style="align-items:flex-start;padding-top:1.5rem">
+  <div class="md adm"><div class="mdh"><span class="mdl">&#9881; Admin Panel</span><button class="mdx" data-close="mAdmin">&#10005;</button></div>
+  <div class="mdb">
+    <div class="atabs">
+      <button class="atab on" data-atab="list">&#128187; Sản phẩm</button>
+      <button class="atab" data-atab="add">&#10133; Thêm mới</button>
+      <button class="atab" data-atab="orders">&#128230; Đơn hàng <span id="adminOrdBadge" style="background:var(--rd);color:#fff;border-radius:10px;font-size:.55rem;font-weight:700;padding:.05rem .35rem;margin-left:.18rem;display:none"></span></button>
+    </div>
+    <div id="atList"><div class="apl" id="apList"></div></div>
+    <div id="atAdd" style="display:none">
+      <input type="hidden" id="editId"/>
+      <div class="fg2"><div class="fg"><label>Tên SP *</label><input class="fi" id="apNm" placeholder="MacBook Pro 14"/></div><div class="fg"><label>Thương hiệu *</label><input class="fi" id="apBr" placeholder="Apple"/></div></div>
+      <div class="fg2">
+        <div class="fg"><label>Danh mục</label><select class="fsel" id="apCt"><option value="gaming">Gaming</option><option value="ultrabook">Ultrabook</option><option value="workstation">Workstation</option><option value="creator">Đồ Hoạ</option><option value="student">Sinh Viên</option><option value="office">Văn Phòng</option></select></div>
+        <div class="fg"><label>Badge</label><select class="fsel" id="apBdg"><option value="">Không</option><option value="new">Mới</option><option value="sale">Giảm</option><option value="hot">Hot</option><option value="2025">2025</option></select></div>
+      </div>
+      <div class="fg2"><div class="fg"><label>Giá bán *</label><input class="fi" id="apPr" type="number" placeholder="25000000"/></div><div class="fg"><label>Giá gốc</label><input class="fi" id="apWs" type="number" placeholder="Để trống"/></div></div>
+      <div class="fg2"><div class="fg"><label>Đánh giá</label><input class="fi" id="apRt" type="number" min="1" max="5" step="0.1" value="4.5"/></div><div class="fg"><label>Lượt đánh giá</label><input class="fi" id="apRv" type="number" value="0"/></div></div>
+      <div class="fg"><label>Thông số (dấu phẩy)</label><input class="fi" id="apSp" placeholder="Core i7, 16GB, 512GB SSD"/></div>
+      <div class="fg">
+        <label>Ảnh sản phẩm</label>
+        <div class="img-upload-wrap">
+          <div class="img-preview" id="imgPreview" onclick="document.getElementById('apImFile').click()">
+            <span class="img-preview-icon">&#128247;</span>
+            <span class="img-preview-txt">Bấm để chọn ảnh từ thiết bị<br><small>hoặc nhập URL bên dưới</small></span>
+          </div>
+          <input type="file" id="apImFile" accept="image/*" style="display:none" onchange="handleImgFile(this)"/>
+          <div style="display:flex;gap:.45rem;margin-top:.5rem;align-items:center">
+            <button type="button" class="img-upload-btn" onclick="document.getElementById('apImFile').click()">&#128247; Chọn ảnh</button>
+            <span style="font-size:.68rem;color:var(--dm)">hoặc</span>
+            <input class="fi" id="apIm" placeholder="https://... (URL ảnh)" style="flex:1;margin:0"/>
+          </div>
+        </div>
+        <div class="fhint">Ảnh từ thiết bị lưu dạng base64 · Để trống = emoji</div>
+      </div>
+      <div class="fg"><label>Emoji icon</label><input class="fi" id="apIc" placeholder="&#128187;" maxlength="4"/></div>
+      <div class="ge" id="apErr"></div>
+      <div class="facs"><button class="bsv" id="btnSave">&#128190; Lưu</button><button class="bce" id="btnCE" style="display:none">Huỷ</button></div>
+    </div>
+    <!-- ORDERS MANAGEMENT TAB -->
+    <div id="atOrders" style="display:none">
+      <!-- Toolbar -->
+      <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem;flex-wrap:wrap">
+        <input class="fi" id="aoSearch" placeholder="🔍 Tìm mã đơn, tên KH, SĐT..." style="flex:1;min-width:160px;padding:.42rem .75rem;font-size:.75rem"/>
+        <select class="fsel" id="aoFilter" style="font-size:.75rem;padding:.42rem .65rem">
+          <option value="all">Tất cả trạng thái</option>
+          <option value="Đang xử lý">⏳ Đang xử lý</option>
+          <option value="Đang giao">🚚 Đang giao</option>
+          <option value="Đã giao">✅ Đã giao</option>
+          <option value="Đã huỷ">❌ Đã huỷ</option>
+        </select>
+        <button class="bclr" id="btnAoRefresh" style="width:auto;padding:.42rem .8rem;font-size:.72rem;margin:0">&#128260; Làm mới</button>
+      </div>
+      <!-- Stats bar -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-bottom:.85rem" id="aoStats"></div>
+      <!-- Order list -->
+      <div id="aoList" style="display:flex;flex-direction:column;gap:.6rem;max-height:52vh;overflow-y:auto;padding-right:.2rem"></div>
+      <!-- Empty -->
+      <div id="aoEmpty" style="display:none;text-align:center;padding:2.5rem 1rem;color:var(--dm)">
+        <div style="font-size:2.5rem;margin-bottom:.6rem">&#128230;</div>
+        <div style="font-size:.82rem;font-weight:600;color:var(--mt)">Chưa có đơn hàng nào</div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- PROFILE -->
+<div class="mbg" id="mProfile">
+  <div class="md wide"><div class="mdh"><span class="mdl">&#128100; Tài khoản của tôi</span><button class="mdx" data-close="mProfile">&#10005;</button></div>
+  <div class="mdb">
+    <div class="avatar-wrap">
+      <div class="avatar-big" id="profileAvatar">U</div>
+      <div><div class="avatar-name" id="profileName">–</div><div class="avatar-role" id="profileRole">–</div></div>
+    </div>
+    <div class="ptabs">
+      <button class="ptab on" data-ptab="info">&#128101; Thông tin</button>
+      <button class="ptab" data-ptab="orders" id="tabOrders">&#128203; Đơn hàng</button>
+      <button class="ptab" data-ptab="edit">&#9999;&#65039; Chỉnh sửa</button>
+      <button class="ptab" data-ptab="pwd">&#128274; Mật khẩu</button>
+    </div>
+    <div id="ptInfo">
+      <div class="info-row"><span class="ir-l">&#128100; Họ &amp; tên</span><span class="ir-r" id="piFullName">–</span></div>
+      <div class="info-row"><span class="ir-l">&#128273; Tên đăng nhập</span><span class="ir-r" id="piUsername">–</span></div>
+      <div class="info-row"><span class="ir-l">&#9993; Email</span><span class="ir-r" id="piEmail">–</span></div>
+      <div class="info-row"><span class="ir-l">&#128222; Điện thoại</span><span class="ir-r" id="piPhone">–</span></div>
+      <div class="info-row"><span class="ir-l">&#128205; Địa chỉ</span><span class="ir-r" id="piAddress">Chưa cập nhật</span></div>
+      <div class="info-row" style="cursor:pointer" id="goToOrders">
+        <span class="ir-l">&#128203; Đơn hàng</span>
+        <span class="ir-r" id="piOrderCnt" style="color:var(--ac);font-weight:700">0 đơn &rsaquo;</span>
+      </div>
+    </div>
+    <!-- ORDERS TAB -->
+    <div id="ptOrders" style="display:none">
+      <div id="ordListWrap"></div>
+    </div>
+    <!-- EDIT TAB -->
+    <div id="ptEdit" style="display:none">
+      <div class="fg2"><div class="fg"><label>Họ *</label><input class="fi" id="eLn" placeholder="Nguyễn"/><div class="fe" id="eLnE"></div></div><div class="fg"><label>Tên *</label><input class="fi" id="eFn" placeholder="Văn A"/><div class="fe" id="eFnE"></div></div></div>
+      <div class="fg"><label>Email *</label><input class="fi" id="eEm" type="email"/><div class="fe" id="eEmE"></div></div>
+      <div class="fg"><label>Số điện thoại</label><input class="fi" id="ePh" type="tel"/><div class="fe" id="ePhE"></div></div>
+      <div class="fg"><label>Địa chỉ</label><input class="fi" id="eAd" placeholder="Số nhà, đường, phường, quận, thành phố"/></div>
+      <div class="ge" id="eGE"></div>
+      <button class="bts" id="btnSaveProfile">&#128190; Lưu thay đổi</button>
+      <div class="danger-zone">
+        <div class="dz-t">&#9888; Vùng nguy hiểm</div>
+        <button class="btn-danger" id="btnLogout" style="background:rgba(100,116,139,.12);color:var(--mt);border-color:rgba(100,116,139,.3)">&#128682; Đăng xuất</button>
+        <button class="btn-danger" id="btnDeleteAccount">&#128465; Xoá tài khoản vĩnh viễn</button>
+      </div>
+    </div>
+    <div id="ptPwd" style="display:none">
+      <div class="fg"><label>Mật khẩu hiện tại *</label><input class="fi" id="pOld" type="password" placeholder="Nhập mật khẩu hiện tại"/><div class="fe" id="pOldE"></div></div>
+      <div class="fg"><label>Mật khẩu mới *</label><input class="fi" id="pNew" type="password" placeholder="Tối thiểu 6 ký tự"/>
+        <div class="pwd-strength str-0" id="pwdBar"></div><div class="str-label" id="pwdLbl"></div>
+        <div class="fe" id="pNewE"></div></div>
+      <div class="fg"><label>Xác nhận mật khẩu mới *</label><input class="fi" id="pCf" type="password" placeholder="Nhập lại"/><div class="fe" id="pCfE"></div></div>
+      <div class="ge" id="pGE"></div>
+      <button class="bts" id="btnSavePwd">&#128274; Đổi mật khẩu</button>
+    </div>
+  </div></div>
+</div>
+
+<!-- CHECKOUT -->
+<div class="ck-modal" id="mCheckout">
+  <div class="ck-box">
+    <div class="ck-hdr"><span class="ck-hdl">&#128722; Thanh toán đơn hàng</span><button class="ck-x" id="btnCkClose">&#10005;</button></div>
+    <div class="ck-steps">
+      <div class="ck-step active" id="ckStep1"><div class="ck-snum">1</div><span class="ck-stxt">Địa chỉ</span></div>
+      <div class="ck-sep"></div>
+      <div class="ck-step" id="ckStep2"><div class="ck-snum">2</div><span class="ck-stxt">Đơn hàng</span></div>
+      <div class="ck-sep"></div>
+      <div class="ck-step" id="ckStep3"><div class="ck-snum">3</div><span class="ck-stxt">Thanh toán</span></div>
+      <div class="ck-sep"></div>
+      <div class="ck-step" id="ckStep4"><div class="ck-snum">4</div><span class="ck-stxt">Xác nhận</span></div>
+    </div>
+    <div class="ck-body">
+      <!-- P0: need login -->
+      <div class="ck-panel active" id="ckP0">
+        <div class="need-login">
+          <div class="nl-icon">&#128274;</div>
+          <div class="nl-title">Đăng nhập để tiếp tục</div>
+          <div class="nl-desc">Bạn cần đăng nhập để đặt hàng.<br>Điều này giúp lưu lịch sử đơn hàng và địa chỉ giao hàng của bạn.</div>
+          <div class="nl-btns">
+            <button class="nl-btn nl-btn-p" id="btnCkLogin">&#128274; Đăng nhập ngay</button>
+            <button class="nl-btn nl-btn-s" id="btnCkReg">&#128100; Đăng ký mới</button>
+          </div>
+        </div>
+      </div>
+      <!-- P1: address -->
+      <div class="ck-panel" id="ckP1">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem">
+          <span style="font-size:.82rem;font-weight:700">&#128205; Chọn địa chỉ giao hàng</span>
+          <button class="addr-btn" id="btnAddAddr" style="background:rgba(249,115,22,.1);color:var(--ac);border-color:rgba(249,115,22,.3);font-size:.7rem;padding:.28rem .72rem">+ Thêm địa chỉ</button>
+        </div>
+        <div class="addr-form" id="addrForm">
+          <div class="af-title" id="afTitle">&#128205; Thêm địa chỉ mới</div>
+          <input type="hidden" id="afEditIdx"/>
+          <div class="fg2"><div class="fg"><label>Họ &amp; tên *</label><input class="fi" id="afName" placeholder="Nguyễn Văn A"/><div class="fe" id="afNameE"></div></div><div class="fg"><label>Số điện thoại *</label><input class="fi" id="afPhone" placeholder="0xxx xxx xxx"/><div class="fe" id="afPhoneE"></div></div></div>
+          <div class="fg"><label>Số nhà, tên đường *</label><input class="fi" id="afStreet" placeholder="123 Lê Lợi"/><div class="fe" id="afStreetE"></div></div>
+          <div class="fg2"><div class="fg"><label>Phường / Xã</label><input class="fi" id="afWard" placeholder="Phường Hồng Bàng"/></div><div class="fg"><label>Quận / Huyện</label><input class="fi" id="afDist" placeholder="Quận Hồng Bàng"/></div></div>
+          <div class="fg"><label>Tỉnh / Thành phố *</label><input class="fi" id="afCity" placeholder="Hải Phòng"/><div class="fe" id="afCityE"></div></div>
+          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem"><input type="checkbox" id="afDefault" style="accent-color:var(--ac);width:14px;height:14px"/><label for="afDefault" style="font-size:.74rem;color:var(--mt);cursor:pointer">Đặt làm địa chỉ mặc định</label></div>
+          <div style="display:flex;gap:.5rem"><button class="bsv" id="btnSaveAddr" style="flex:1;padding:.6rem">&#128190; Lưu địa chỉ</button><button class="bce" id="btnCancelAddr" style="padding:.6rem .95rem">Huỷ</button></div>
+        </div>
+        <div id="addrList"></div>
+        <div style="font-size:.67rem;color:var(--dm);margin-top:.45rem">&#8505;&#65039; Bấm vào thẻ địa chỉ để chọn nơi giao hàng</div>
+      </div>
+      <!-- P2: order review -->
+      <div class="ck-panel" id="ckP2">
+        <div style="font-size:.82rem;font-weight:700;margin-bottom:.85rem">&#128203; Xem lại đơn hàng</div>
+        <div class="oi-list" id="ckOrderItems"></div>
+        <div class="confirm-box"><div class="cb-label">&#128205; Giao đến</div><div class="cb-detail" id="ckAddrDetail">–</div></div>
+        <div class="sum-box">
+          <div class="sum-row"><span class="sum-label">Tạm tính</span><span class="sum-val" id="ckSubtotal">–</span></div>
+          <div class="sum-row"><span class="sum-label">Phí vận chuyển</span><span class="sum-val" style="color:var(--gn)">Miễn phí &#127881;</span></div>
+          <div class="sum-row total"><span>Tổng thanh toán</span><span id="ckTotal2">–</span></div>
+        </div>
+      </div>
+      <!-- P3: payment -->
+      <div class="ck-panel" id="ckP3">
+        <div style="font-size:.82rem;font-weight:700;margin-bottom:.85rem">&#128179; Phương thức thanh toán</div>
+        <div class="pm-list">
+          <div class="pm selected" data-pm="cod"><div class="pm-radio"></div><div class="pm-icon">&#128181;</div><div class="pm-info"><div class="pm-name">Thanh toán khi nhận hàng (COD)</div><div class="pm-desc">Trả tiền mặt khi nhận hàng</div></div><span class="pm-badge">Phổ biến</span></div>
+          <div class="pm" data-pm="bank"><div class="pm-radio"></div><div class="pm-icon">&#127974;</div><div class="pm-info"><div class="pm-name">Chuyển khoản ngân hàng</div><div class="pm-desc">MB Bank · BIDV · Vietcombank</div></div></div>
+          <div class="pm" data-pm="momo"><div class="pm-radio"></div><div class="pm-icon">&#128147;</div><div class="pm-info"><div class="pm-name">Ví MoMo</div><div class="pm-desc">Thanh toán qua ví điện tử MoMo</div></div></div>
+          <div class="pm" data-pm="vnpay"><div class="pm-radio"></div><div class="pm-icon">&#128179;</div><div class="pm-info"><div class="pm-name">VNPay / Thẻ ATM nội địa</div><div class="pm-desc">Cổng thanh toán VNPay an toàn</div></div></div>
+          <div class="pm" data-pm="installment"><div class="pm-radio"></div><div class="pm-icon">&#128203;</div><div class="pm-info"><div class="pm-name">Trả góp 0% lãi suất</div><div class="pm-desc">3 – 24 tháng · Visa · Mastercard</div></div></div>
+        </div>
+        <div class="bank-info" id="bankInfo">
+          <div style="font-weight:700;color:var(--ac);margin-bottom:.4rem">&#127974; Thông tin chuyển khoản</div>
+          <div>Ngân hàng: <b>MB Bank</b></div><div>Số TK: <b>0794105811</b></div><div>Chủ TK: <b>NGUYEN VIET THAO</b></div>
+          <div style="margin-top:.4rem;color:var(--dm);font-size:.68rem">Nội dung: <b id="bankNote">NVT-ORDER</b> · Gửi bill qua Zalo 0794105811</div>
+        </div>
+      </div>
+      <!-- P4: confirm -->
+      <div class="ck-panel" id="ckP4">
+        <div style="font-size:.82rem;font-weight:700;margin-bottom:.85rem">&#9989; Xác nhận đặt hàng</div>
+        <div class="confirm-box" style="margin-bottom:.65rem"><div class="cb-label">&#128100; Người nhận</div><div class="cb-detail" id="ckConfirmName">–</div></div>
+        <div class="confirm-box" style="margin-bottom:.65rem"><div class="cb-label">&#128205; Địa chỉ giao hàng</div><div class="cb-detail" id="ckConfirmAddr">–</div></div>
+        <div class="confirm-box" style="margin-bottom:.65rem"><div class="cb-label">&#128179; Thanh toán</div><div class="cb-detail" id="ckConfirmPay">–</div></div>
+        <!-- Product list in confirm -->
+        <div style="font-size:.78rem;font-weight:700;margin-bottom:.55rem;color:var(--mt)">&#128203; Sản phẩm đặt mua</div>
+        <div class="oi-list" id="ckConfirmItems" style="margin-bottom:.85rem"></div>
+        <div class="sum-box">
+          <div class="sum-row"><span class="sum-label">Số lượng SP</span><span class="sum-val" id="ckConfirmQty">–</span></div>
+          <div class="sum-row"><span class="sum-label">Phí vận chuyển</span><span class="sum-val" style="color:var(--gn)">Miễn phí &#127881;</span></div>
+          <div class="sum-row total"><span>Tổng thanh toán</span><span id="ckConfirmTotal">–</span></div>
+        </div>
+        <div style="background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);border-radius:var(--r);padding:.65rem .9rem;font-size:.72rem;color:var(--mt);line-height:1.6">&#8505;&#65039; Bằng cách đặt hàng, bạn đồng ý với <a href="#" style="color:var(--ac)">Điều khoản</a> &amp; <a href="#" style="color:var(--ac)">Chính sách bảo mật</a> của LaptopNVT.</div>
+      </div>
+      <!-- P5: success -->
+      <div class="ck-panel" id="ckP5">
+        <div class="ck-success">
+          <span class="cs-icon">&#127881;</span>
+          <div class="cs-title">Đặt hàng thành công!</div>
+          <div class="cs-desc">Cảm ơn bạn đã tin tưởng LaptopNVT!<br>Chúng tôi sẽ xác nhận trong <b>30 phút</b>. Mã đơn hàng:</div>
+          <div class="cs-code" id="csOrderCode">NVT-000000</div>
+          <div class="cs-desc" style="font-size:.72rem">Theo dõi đơn qua Zalo <b>0794 105 811</b> hoặc email.</div>
+          <button class="bts" id="btnCkDone" style="max-width:200px;margin:0 auto">&#10004; Về trang chủ</button>
+        </div>
+      </div>
+    </div>
+    <div class="ck-footer" id="ckFooter">
+      <button class="ck-back" id="btnCkBack" style="display:none">&#8592; Quay lại</button>
+      <div style="flex:1"></div>
+      <button class="ck-next" id="btnCkNext">Tiếp theo &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER DETAIL MODAL (Admin) -->
+<div class="mbg ord-detail" id="mOrdDetail">
+  <div class="md"><div class="mdh"><span class="mdl">&#128230; Chi tiết đơn hàng</span><button class="mdx" data-close="mOrdDetail">&#10005;</button></div>
+  <div class="mdb" id="ordDetailBody"></div></div>
+</div>
+
+<button class="fab hid" id="adminFab">&#9881; Admin</button>
+<div class="toast" id="toast"></div>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/firebase-config.js"></script>
+<script type="module">
+  import { initializeApp }             from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, onAuthStateChanged,
+           signInWithEmailAndPassword,
+           createUserWithEmailAndPassword,
+           signOut, sendEmailVerification,
+           sendPasswordResetEmail, updatePassword,
+           reauthenticateWithCredential,
+           EmailAuthProvider, GoogleAuthProvider,
+           signInWithPopup, deleteUser }  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, doc, getDoc,
+           setDoc, updateDoc, deleteDoc,
+           collection, addDoc, getDocs,
+           query, where, orderBy, onSnapshot,
+           serverTimestamp }              from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  const cfg = window._fbConfig;
+  if (!cfg) { console.error('[Firebase] Không tìm thấy config!'); }
+  else {
+    const app  = initializeApp(cfg);
+    const auth = getAuth(app);
+    const db   = getFirestore(app);
+    auth.languageCode = 'vi';
+    window.FB_AUTH  = auth;
+    window.FB_DB    = db;
+    window.FB_FUNCS = {
+      onAuthStateChanged, signInWithEmailAndPassword,
+      createUserWithEmailAndPassword, signOut,
+      sendEmailVerification, sendPasswordResetEmail,
+      updatePassword, reauthenticateWithCredential,
+      EmailAuthProvider, GoogleAuthProvider,
+      signInWithPopup, deleteUser,
+      doc, getDoc, setDoc, updateDoc, deleteDoc,
+      collection, addDoc, getDocs,
+      query, where, orderBy, onSnapshot, serverTimestamp
+    };
+    window._fbReady = true;
+    window.dispatchEvent(new Event('firebase-ready'));
+    console.log('[Firebase] ✅ Kết nối:', cfg.projectId);
+    setTimeout(() => { if(typeof listenProductsRealtime==='function') listenProductsRealtime(); }, 500);
+  }
+</script>
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/products.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/router.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+/* ── Cập nhật UI login theo chế độ Firebase/localStorage ── */
+function updateLoginUI() {
+  const isFB = window.FB_CONFIGURED && window.FB_AUTH;
+  const ggBtn   = document.getElementById('btnLoginGoogle');
+  const divider = document.getElementById('loginDivider');
+  const forgot  = document.getElementById('btnForgotPwd');
+  if (ggBtn)   ggBtn.style.display   = isFB ? 'flex'   : 'none';
+  if (divider) divider.style.display = isFB ? 'flex'   : 'none';
+  if (forgot)  forgot.style.display  = isFB ? 'inline' : 'none';
+}
+window.addEventListener('firebase-ready', updateLoginUI);
+if (window._fbReady) updateLoginUI();
+
+/* ── Polling xác nhận email sau đăng ký ── */
+let _verifyInterval = null;
+let _verifyPwd = '';
+
+function openVerifyNotice(email, password) {
+  _verifyPwd = password;
+  const addr = document.getElementById('verifyEmailAddr');
+  if (addr) addr.textContent = email;
+  document.getElementById('mVerifyNotice').classList.add('show');
+  startVerifyPolling(email, password);
+}
+
+function closeVerifyNotice() {
+  document.getElementById('mVerifyNotice').classList.remove('show');
+  clearInterval(_verifyInterval);
+  _verifyInterval = null;
+  _verifyPwd = '';
+}
+
+function startVerifyPolling(email, password) {
+  clearInterval(_verifyInterval);
+  _verifyInterval = setInterval(async () => {
+    if (!window.FB_AUTH || !window.FB_FUNCS) return;
+    try {
+      const { signInWithEmailAndPassword, signOut } = window.FB_FUNCS;
+      /* Đăng nhập tạm để reload trạng thái xác minh */
+      const cred = await signInWithEmailAndPassword(window.FB_AUTH, email, password);
+      await cred.user.reload();
+      if (cred.user.emailVerified) {
+        /* Đã xác minh → đóng modal, hoàn tất đăng nhập */
+        clearInterval(_verifyInterval);
+        closeVerifyNotice();
+        /* bootAuth sẽ tự nhận user đã đăng nhập qua onAuthStateChanged */
+        if (typeof toast === 'function') toast('🎉 Xác nhận thành công! Chào mừng bạn!');
+      } else {
+        /* Chưa xác minh → đăng xuất tạm */
+        await signOut(window.FB_AUTH);
+      }
+    } catch(e) { /* Bỏ qua lỗi polling */ }
+  }, 3000); /* Kiểm tra mỗi 3 giây */
+}
+
+/* Handler nút Gửi lại */
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'btnResendVerify') {
+    if (!window.FB_AUTH || !window.FB_FUNCS || !_verifyPwd) return;
+    const email = document.getElementById('verifyEmailAddr')?.textContent;
+    if (!email) return;
+    const { signInWithEmailAndPassword, sendEmailVerification, signOut } = window.FB_FUNCS;
+    signInWithEmailAndPassword(window.FB_AUTH, email, _verifyPwd)
+      .then(c => sendEmailVerification(c.user).then(() => signOut(window.FB_AUTH)))
+      .then(() => { if(typeof toast==='function') toast('📧 Đã gửi lại email xác nhận!'); })
+      .catch(() => {});
+  }
+  if (e.target.id === 'btnCancelVerify') {
+    closeVerifyNotice();
+  }
+});
+</script>
+</body>
+</html>
