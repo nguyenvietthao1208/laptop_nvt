@@ -59,7 +59,33 @@ function renderAuth() {
    FIREBASE MODE
    ══════════════════════════════════════════ */
 async function initFirebase() {
-  const { onAuthStateChanged } = window.FB_FUNCS;
+  const { onAuthStateChanged, getRedirectResult, GoogleAuthProvider } = window.FB_FUNCS;
+
+  // ✅ Xử lý kết quả redirect từ Google
+  try {
+    const result = await getRedirectResult(window.FB_AUTH);
+    if (result?.user) {
+      const user = result.user;
+      const existing = await fsGet('users', user.uid);
+      if (!existing) {
+        const parts = (user.displayName || '').split(' ');
+        await fsSet('users', user.uid, {
+          firstName: parts.slice(0, -1).join(' ') || parts[0] || '',
+          lastName:  parts.slice(-1)[0] || '',
+          email:     user.email,
+          username:  user.email.split('@')[0],
+          phone:     '',
+          role:      user.email === ADMIN_EMAIL ? 'admin' : 'customer',
+          joined:    new Date().toISOString().slice(0,10),
+        });
+      }
+      toast('Đăng nhập Google thành công! 🎉');
+    }
+  } catch (err) {
+    if (err.code !== 'auth/popup-closed-by-user') {
+      console.error('[Google Redirect Error]', err);
+    }
+  }
 
   /* Lắng nghe trạng thái đăng nhập real-time */
   onAuthStateChanged(window.FB_AUTH, async (fbUser) => {
@@ -170,7 +196,6 @@ async function doLoginGoogleFirebase() {
     const result   = await signInWithPopup(window.FB_AUTH, provider);
     const user     = result.user;
 
-    /* Lưu profile lần đầu */
     const existing = await fsGet('users', user.uid);
     if (!existing) {
       const parts = (user.displayName || '').split(' ');
@@ -188,7 +213,7 @@ async function doLoginGoogleFirebase() {
     toast('Đăng nhập Google thành công! 🎉');
   } catch (err) {
     if (err.code !== 'auth/popup-closed-by-user') {
-      toast('Đăng nhập Google thất bại', 'var(--rd)');
+      toast('Đăng nhập Google thất bại: ' + err.code, 'var(--rd)');
     }
   }
 }

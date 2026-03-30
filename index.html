@@ -604,7 +604,8 @@
            sendPasswordResetEmail, updatePassword,
            reauthenticateWithCredential,
            EmailAuthProvider, GoogleAuthProvider,
-           signInWithPopup, deleteUser }  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+           signInWithPopup, deleteUser, 
+           getRedirectResult  }  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
   import { getFirestore, doc, getDoc,
            setDoc, updateDoc, deleteDoc,
            collection, addDoc, getDocs,
@@ -628,7 +629,8 @@
       signInWithPopup, deleteUser,
       doc, getDoc, setDoc, updateDoc, deleteDoc,
       collection, addDoc, getDocs,
-      query, where, orderBy, onSnapshot, serverTimestamp
+      query, where, orderBy, onSnapshot, serverTimestamp, 
+      getRedirectResult,
     };
     window._fbReady = true;
     window.dispatchEvent(new Event('firebase-ready'));
