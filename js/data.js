@@ -48,4 +48,4 @@ const BL={new:'Mới',sale:'Giảm',hot:'Hot','2025':'2025'};
 const BLC={new:'bn2',sale:'bs2',hot:'bh2','2025':'bp2'};
 const CIC={gaming:'&#127918;',ultrabook:'&#128187;',workstation:'&#128187;',creator:'&#127912;',student:'&#127891;',office:'&#127970;'};
 const CNAME={gaming:'Laptop Gaming',ultrabook:'Ultrabook',workstation:'Workstation',creator:'Đồ Hoạ',student:'Sinh Viên',office:'Văn Phòng',all:'Tất cả Laptop'};
-const PM_LABELS={cod:'Thanh toán khi nhận hàng (COD)',bank:'Chuyển khoản ngân hàng',momo:'Ví MoMo',vnpay:'VNPay / Thẻ ATM nội địa',installment:'Trả góp 0% lãi suất'};
+const PM_LABELS={cod:'Thanh toán khi nhận hàng (COD)',bank:'Chuyển khoản ngân hàng',momo:'Ví MoMo'};

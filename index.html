@@ -244,6 +244,11 @@
   <div class="fg"><label>Số điện thoại</label><input class="fi" id="rPh" type="tel" placeholder="0xxx xxx xxx"/><div class="fe" id="rPhE"></div></div>
   <div class="fg"><label>Mật khẩu</label><input class="fi" id="rPw" type="password" placeholder="Tối thiểu 6 ký tự"/><div class="fe" id="rPwE"></div></div>
   <div class="fg"><label>Xác nhận mật khẩu</label><input class="fi" id="rPw2" type="password" placeholder="Nhập lại"/><div class="fe" id="rPw2E"></div></div>
+  <div style="text-align:center;margin:1rem 0 .4rem;font-size:.72rem;color:var(--dm)">── hoặc ──</div>
+  <button class="bts" id="btnRegGoogle" style="background:#fff;color:#333;border:1.5px solid #dadce0;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:.55rem;font-weight:600">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18"/>
+    Đăng ký nhanh bằng Google
+  </button>
   <button class="bts" id="btnReg">Tạo tài khoản</button></div></div>
 </div>
 
@@ -426,16 +431,33 @@
       <div class="ck-step" id="ckStep4"><div class="ck-snum">4</div><span class="ck-stxt">Xác nhận</span></div>
     </div>
     <div class="ck-body">
-      <!-- P0: need login -->
+      <!-- P0: login or guest -->
       <div class="ck-panel active" id="ckP0">
         <div class="need-login">
-          <div class="nl-icon">&#128274;</div>
-          <div class="nl-title">Đăng nhập để tiếp tục</div>
-          <div class="nl-desc">Bạn cần đăng nhập để đặt hàng.<br>Điều này giúp lưu lịch sử đơn hàng và địa chỉ giao hàng của bạn.</div>
-          <div class="nl-btns">
-            <button class="nl-btn nl-btn-p" id="btnCkLogin">&#128274; Đăng nhập ngay</button>
-            <button class="nl-btn nl-btn-s" id="btnCkReg">&#128100; Đăng ký mới</button>
+          <div class="nl-icon">&#128722;</div>
+          <div class="nl-title">Tiếp tục đặt hàng</div>
+          <div class="nl-desc">Đăng nhập để lưu lịch sử đơn hàng, hoặc mua hàng ngay với tư cách khách.</div>
+          <div class="nl-btns" style="flex-direction:column;gap:.6rem;max-width:320px;margin:0 auto">
+            <button class="nl-btn nl-btn-p" id="btnCkLogin" style="width:100%">&#128274; Đăng nhập / Đăng ký</button>
+            <button class="nl-btn nl-btn-s" id="btnCkGuest" style="width:100%">&#128100; Tiếp tục với tư cách khách</button>
           </div>
+        </div>
+        <!-- Guest form -->
+        <div id="guestForm" style="display:none;margin-top:1.2rem">
+          <div style="font-size:.8rem;font-weight:700;margin-bottom:.85rem;color:var(--ac)">&#128100; Thông tin người mua</div>
+          <div class="fg2">
+            <div class="fg"><label>Họ &amp; tên *</label><input class="fi" id="guestName" placeholder="Nguyễn Văn A"/><div class="fe" id="guestNameE"></div></div>
+            <div class="fg"><label>Số điện thoại *</label><input class="fi" id="guestPhone" placeholder="0xxx xxx xxx"/><div class="fe" id="guestPhoneE"></div></div>
+          </div>
+          <div class="fg"><label>Email</label><input class="fi" id="guestEmail" placeholder="email@example.com (tuỳ chọn)" type="email"/></div>
+          <div style="font-size:.8rem;font-weight:700;margin:.9rem 0 .65rem;color:var(--ac)">&#128205; Địa chỉ giao hàng</div>
+          <div class="fg"><label>Số nhà, tên đường *</label><input class="fi" id="guestStreet" placeholder="123 Lê Lợi"/><div class="fe" id="guestStreetE"></div></div>
+          <div class="fg2">
+            <div class="fg"><label>Phường / Xã</label><input class="fi" id="guestWard" placeholder="Phường Hồng Bàng"/></div>
+            <div class="fg"><label>Quận / Huyện</label><input class="fi" id="guestDist" placeholder="Quận Hồng Bàng"/></div>
+          </div>
+          <div class="fg"><label>Tỉnh / Thành phố *</label><input class="fi" id="guestCity" placeholder="Hải Phòng"/><div class="fe" id="guestCityE"></div></div>
+          <button class="bts" id="btnGuestContinue" style="margin-top:.5rem">Tiếp tục &#8594;</button>
         </div>
       </div>
       <!-- P1: address -->
@@ -473,15 +495,57 @@
         <div style="font-size:.82rem;font-weight:700;margin-bottom:.85rem">&#128179; Phương thức thanh toán</div>
         <div class="pm-list">
           <div class="pm selected" data-pm="cod"><div class="pm-radio"></div><div class="pm-icon">&#128181;</div><div class="pm-info"><div class="pm-name">Thanh toán khi nhận hàng (COD)</div><div class="pm-desc">Trả tiền mặt khi nhận hàng</div></div><span class="pm-badge">Phổ biến</span></div>
-          <div class="pm" data-pm="bank"><div class="pm-radio"></div><div class="pm-icon">&#127974;</div><div class="pm-info"><div class="pm-name">Chuyển khoản ngân hàng</div><div class="pm-desc">MB Bank · BIDV · Vietcombank</div></div></div>
-          <div class="pm" data-pm="momo"><div class="pm-radio"></div><div class="pm-icon">&#128147;</div><div class="pm-info"><div class="pm-name">Ví MoMo</div><div class="pm-desc">Thanh toán qua ví điện tử MoMo</div></div></div>
-          <div class="pm" data-pm="vnpay"><div class="pm-radio"></div><div class="pm-icon">&#128179;</div><div class="pm-info"><div class="pm-name">VNPay / Thẻ ATM nội địa</div><div class="pm-desc">Cổng thanh toán VNPay an toàn</div></div></div>
-          <div class="pm" data-pm="installment"><div class="pm-radio"></div><div class="pm-icon">&#128203;</div><div class="pm-info"><div class="pm-name">Trả góp 0% lãi suất</div><div class="pm-desc">3 – 24 tháng · Visa · Mastercard</div></div></div>
+          <div class="pm" data-pm="bank"><div class="pm-radio"></div><div class="pm-icon">&#127974;</div><div class="pm-info"><div class="pm-name">Chuyển khoản ngân hàng</div><div class="pm-desc">MB Bank · Quét mã QR</div></div></div>
+          <div class="pm" data-pm="momo"><div class="pm-radio"></div><div class="pm-icon">&#128147;</div><div class="pm-info"><div class="pm-name">Ví MoMo</div><div class="pm-desc">Quét mã QR MoMo</div></div></div>
         </div>
-        <div class="bank-info" id="bankInfo">
-          <div style="font-weight:700;color:var(--ac);margin-bottom:.4rem">&#127974; Thông tin chuyển khoản</div>
-          <div>Ngân hàng: <b>MB Bank</b></div><div>Số TK: <b>0794105811</b></div><div>Chủ TK: <b>NGUYEN VIET THAO</b></div>
-          <div style="margin-top:.4rem;color:var(--dm);font-size:.68rem">Nội dung: <b id="bankNote">NVT-ORDER</b> · Gửi bill qua Zalo 0794105811</div>
+        <!-- Ngân hàng -->
+        <div class="bank-info" id="bankInfo" style="display:none">
+          <div style="font-weight:700;color:var(--ac);margin-bottom:.65rem">&#127974; Chuyển khoản ngân hàng</div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap">
+            <div style="flex:1;min-width:160px">
+              <div style="font-size:.76rem;line-height:1.9">
+                <div>Ngân hàng: <b>MB Bank</b></div>
+                <div>Số TK: <b>0794105811</b></div>
+                <div>Chủ TK: <b>NGUYEN VIET THAO</b></div>
+                <div style="margin-top:.4rem;color:var(--dm);font-size:.68rem">Nội dung: <b id="bankNote">NVT-ORDER</b></div>
+                <div style="color:var(--dm);font-size:.68rem">Gửi bill qua Zalo: <b>0794105811</b></div>
+              </div>
+            </div>
+            <div style="text-align:center">
+              <!-- THAY src DƯỚI ĐÂY bằng URL ảnh QR ngân hàng của bạn -->
+              <img id="bankQR" src="pic/mbbank.jpg" alt="QR Ngân hàng"
+                   style="width:130px;height:130px;border-radius:10px;border:2px solid var(--bd);object-fit:cover"
+                   onerror="this.style.display='none';this.nextSibling.style.display='flex'"/>
+              <div style="display:none;width:130px;height:130px;border-radius:10px;border:2px dashed var(--bd);align-items:center;justify-content:center;flex-direction:column;gap:.3rem;color:var(--dm);font-size:.65rem;text-align:center;padding:.5rem">
+                &#127974;<br>Chèn ảnh QR<br>ngân hàng
+              </div>
+              <div style="font-size:.62rem;color:var(--dm);margin-top:.3rem">Quét để chuyển khoản</div>
+            </div>
+          </div>
+        </div>
+        <!-- MoMo -->
+        <div class="bank-info" id="momoInfo" style="display:none">
+          <div style="font-weight:700;color:#ae2d68;margin-bottom:.65rem">&#128147; Thanh toán MoMo</div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap">
+            <div style="flex:1;min-width:160px">
+              <div style="font-size:.76rem;line-height:1.9">
+                <div>Số MoMo: <b>0794105811</b></div>
+                <div>Tên: <b>NGUYEN VIET THAO</b></div>
+                <div style="margin-top:.4rem;color:var(--dm);font-size:.68rem">Nội dung: <b id="momoNote">NVT-ORDER</b></div>
+                <div style="color:var(--dm);font-size:.68rem">Gửi bill qua Zalo: <b>0794105811</b></div>
+              </div>
+            </div>
+            <div style="text-align:center">
+              <!-- THAY src DƯỚI ĐÂY bằng URL ảnh QR MoMo của bạn -->
+              <img id="momoQR" src="pic/momo.jpg" alt="QR MoMo"
+                   style="width:130px;height:130px;border-radius:10px;border:2px solid #ae2d68;object-fit:cover"
+                   onerror="this.style.display='none';this.nextSibling.style.display='flex'"/>
+              <div style="display:none;width:130px;height:130px;border-radius:10px;border:2px dashed #ae2d68;align-items:center;justify-content:center;flex-direction:column;gap:.3rem;color:#ae2d68;font-size:.65rem;text-align:center;padding:.5rem">
+                &#128147;<br>Chèn ảnh QR<br>MoMo
+              </div>
+              <div style="font-size:.62rem;color:var(--dm);margin-top:.3rem">Quét để thanh toán MoMo</div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- P4: confirm -->

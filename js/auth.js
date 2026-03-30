@@ -405,7 +405,7 @@ function getFullUser() {
 }
 
 function openProfile() {
-  if (!curUser) { oM('mLogin'); return; }
+  if (!curUser || curUser.isGuest) { oM('mLogin'); return; }
   swPTab('info'); renderProfileInfo();
   const uid = curUser.uid||curUser.username;
   const cnt = S.gOrders().filter(o=>o.user===uid).length;

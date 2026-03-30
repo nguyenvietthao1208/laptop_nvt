@@ -82,6 +82,13 @@ document.addEventListener('click',function(e){
     case 'btnCkBack':ckBack();break;
     case 'btnCkNext':ckNext();break;
     case 'btnCkLogin':cM('mCheckout');oM('mLogin');break;
+    case 'btnCkGuest':
+      $('guestForm').style.display='block';
+      $('btnCkGuest').style.display='none';
+      $('btnCkLogin').style.display='none';
+      break;
+    case 'btnGuestContinue':handleGuestContinue();break;
+    case 'btnRegGoogle':if(typeof doLoginGoogle==='function')doLoginGoogle();break;
     case 'btnCkReg':cM('mCheckout');oM('mReg');break;
     case 'btnAddAddr':if(!$('addrForm').classList.contains('open'))openAddrForm(-1);else $('addrForm').classList.remove('open');break;
     case 'btnSaveAddr':saveAddrForm();break;
@@ -134,6 +141,48 @@ function syncAddresses(addrs) {
     const uid = curUser.uid || curUser.username;
     fsSaveAddresses(uid, addrs);
   }
+}
+
+/* ── GUEST CHECKOUT ── */
+function handleGuestContinue(){
+  const name   = $('guestName')?.value.trim();
+  const phone  = $('guestPhone')?.value.trim();
+  const street = $('guestStreet')?.value.trim();
+  const city   = $('guestCity')?.value.trim();
+  let ok = true;
+  cE(['guestNameE','guestPhoneE','guestStreetE','guestCityE']);
+  if(!name)  {sE('guestNameE','Nhập họ tên');ok=false;}
+  if(!phone||!/^(0|\+84)\d{8,10}$/.test(phone)){sE('guestPhoneE','SĐT không hợp lệ');ok=false;}
+  if(!street){sE('guestStreetE','Nhập địa chỉ');ok=false;}
+  if(!city)  {sE('guestCityE','Nhập tỉnh/thành phố');ok=false;}
+  if(!ok) return;
+  /* Tạo guest session */
+  const ward  = $('guestWard')?.value.trim()||'';
+  const dist  = $('guestDist')?.value.trim()||'';
+  const email = $('guestEmail')?.value.trim()||'';
+  curUser = {
+    uid: 'guest_'+Date.now(),
+    username: 'guest',
+    name: name,
+    firstName: name,
+    lastName: '',
+    phone: phone,
+    email: email,
+    role: 'guest',
+    isGuest: true,
+  };
+  /* Lưu địa chỉ vào S.sAddr */
+  const addr = [{name,phone,street,ward,dist,city,isDefault:true}];
+  S.sAddr(addr);
+  selAddrIdx = 0;
+  /* Chuyển sang bước 1 (địa chỉ) với địa chỉ đã điền */
+  ckStep=1;updateCkSteps();showCkPanel(1);
+  renderAddrList();
+  $('ckFooter').style.display='flex';
+  $('btnCkBack').style.display='none';
+  $('btnCkNext').innerHTML='Tiếp theo &#8594;';
+  $('btnCkNext').disabled=false;
+  renderAuth();
 }
 /* ══════════════════ INIT ══════════════════ */
 window.addEventListener('hashchange', router);

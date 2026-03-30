@@ -4,6 +4,7 @@ async function openCheckout(){
   selPm='cod';
   document.querySelectorAll('.pm').forEach(p=>p.classList.toggle('selected',p.dataset.pm==='cod'));
   $('bankInfo').style.display='none';
+  if($('momoInfo')) $('momoInfo').style.display='none';
   /* Đồng bộ địa chỉ từ Firestore */
   if(curUser&&typeof fsGetAddresses==='function'){
     const uid=curUser.uid||curUser.username;
@@ -99,13 +100,17 @@ function ckNext(){
     const total=cart.reduce((s,c)=>s+c.price*c.qty,0);
     const code='NVT-'+Date.now().toString().slice(-6);
     const uid=curUser.uid||curUser.username;
-    const order={code,user:uid,userName:curUser.name||'',items:cart.map(c=>({...c})),address:a,payment:selPm,total,date:new Date().toISOString(),status:'Đang xử lý'};
+    const order={code,user:uid,userName:curUser.name||'',isGuest:curUser.isGuest||false,items:cart.map(c=>({...c})),address:a,payment:selPm,total,date:new Date().toISOString(),status:'Đang xử lý'};
     /* Lưu localStorage (fallback) */
     const orders=S.gOrders();orders.push(order);S.sOrders(orders);
     /* Lưu Firestore (đồng bộ mọi thiết bị) */
     if(typeof fsSaveOrder==='function') fsSaveOrder(order);
     cart.length=0;renderCart();
-    $('csOrderCode').textContent=code;if(selPm==='bank')$('bankNote').textContent=code;
+    /* Reset guest session sau khi đặt hàng */
+    if(curUser&&curUser.isGuest){curUser=null;renderAuth();}
+    $('csOrderCode').textContent=code;
+    if($('bankNote')) $('bankNote').textContent=code;
+    if($('momoNote')) $('momoNote').textContent=code;
     document.querySelectorAll('.ck-panel').forEach(p=>p.classList.remove('active'));$('ckP5').classList.add('active');
     $('ckFooter').style.display='none';
     document.querySelectorAll('.ck-step').forEach(s=>{s.classList.remove('active');s.classList.add('done');});
@@ -118,3 +123,13 @@ function ckBack(){
   else if(ckStep===2)$('btnCkNext').innerHTML='Chọn thanh toán &rarr;';
   else if(ckStep===3)$('btnCkNext').innerHTML='Xác nhận &rarr;';
 }
+/* ── Xử lý chọn phương thức thanh toán ── */
+document.addEventListener('click', function(e){
+  const pm = e.target.closest('.pm');
+  if(!pm) return;
+  selPm = pm.dataset.pm;
+  document.querySelectorAll('.pm').forEach(p => p.classList.toggle('selected', p === pm));
+
+  $('bankInfo').style.display = selPm === 'bank' ? 'block' : 'none';
+  if($('momoInfo')) $('momoInfo').style.display = selPm === 'momo' ? 'block' : 'none';
+});
