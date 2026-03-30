@@ -63,6 +63,8 @@ document.addEventListener('click',function(e){
     case 'btnCE':clrForm();break;
     case 'adminFab':swTab('list');clrForm();oM('mAdmin');updateAdminOrdBadge();break;
     case 'btnAoRefresh':renderAdminOrders();break;
+    case 'btnExportOrders':exportOrdersPDF();break;
+    case 'btnExportExcel':exportOrdersExcel();break;
     case 'btnSaveProfile':doSaveProfile();break;
     case 'btnSavePwd':doSavePwd();break;
     case 'btnLogout':doLogout();break;

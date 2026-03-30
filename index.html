@@ -321,7 +321,7 @@
     <!-- ORDERS MANAGEMENT TAB -->
     <div id="atOrders" style="display:none">
       <!-- Toolbar -->
-      <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.85rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.65rem;flex-wrap:wrap">
         <input class="fi" id="aoSearch" placeholder="🔍 Tìm mã đơn, tên KH, SĐT..." style="flex:1;min-width:160px;padding:.42rem .75rem;font-size:.75rem"/>
         <select class="fsel" id="aoFilter" style="font-size:.75rem;padding:.42rem .65rem">
           <option value="all">Tất cả trạng thái</option>
@@ -331,6 +331,18 @@
           <option value="Đã huỷ">❌ Đã huỷ</option>
         </select>
         <button class="bclr" id="btnAoRefresh" style="width:auto;padding:.42rem .8rem;font-size:.72rem;margin:0">&#128260; Làm mới</button>
+      </div>
+      <!-- Xuất hóa đơn theo ngày -->
+      <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.85rem;background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.18);border-radius:var(--r);padding:.55rem .75rem;flex-wrap:wrap">
+        <span style="font-size:.72rem;font-weight:700;color:var(--ac);flex-shrink:0">📄 Xuất hóa đơn:</span>
+        <input type="date" id="exportDate" class="fi" onfocus="this.value=this.value||new Date().toISOString().slice(0,10)" style="flex:1;min-width:130px;max-width:180px;padding:.3rem .65rem;font-size:.74rem;margin:0"
+               value=""/>
+        <button id="btnExportOrders" style="background:var(--ac);color:#fff;border:none;padding:.35rem .85rem;border-radius:var(--r2);font-size:.74rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s">
+          ⬇️ Xuất PDF
+        </button>
+        <button id="btnExportExcel" style="background:#22c55e;color:#fff;border:none;padding:.35rem .85rem;border-radius:var(--r2);font-size:.74rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s">
+          📊 Xuất Excel
+        </button>
       </div>
       <!-- Stats bar -->
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-bottom:.85rem" id="aoStats"></div>
