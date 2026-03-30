@@ -430,8 +430,8 @@ function exportOrdersPDF() {
   toast(`📄 Xuất ${orders.length} đơn ngày ${dateVN}`);
 }
 
-/* ── XUẤT EXCEL (CSV) ── */
-function exportOrdersExcel() {
+/* ── XUẤT EXCEL (.xlsx) dùng SheetJS ── */
+async function exportOrdersExcel() {
   const dateStr = getExportDate();
   const orders  = getOrdersByDate(dateStr);
   const dateVN  = formatDateVN(dateStr);
@@ -441,49 +441,76 @@ function exportOrdersExcel() {
     return;
   }
 
+  /* Load SheetJS nếu chưa có */
+  if (!window.XLSX) {
+    await new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
   const PM_NAMES = {cod:'COD', bank:'Chuyển khoản', momo:'MoMo', vnpay:'VNPay', installment:'Trả góp 0%'};
+  const HEADERS  = ['STT','Mã đơn','Thời gian','Khách hàng','Điện thoại','Địa chỉ','Sản phẩm','Số lượng','Thanh toán','Tổng tiền (₫)','Trạng thái'];
 
-  /* BOM UTF-8 để Excel đọc đúng tiếng Việt */
-  let csv = '\uFEFF';
-  csv += `BÁO CÁO ĐƠN HÀNG NGÀY ${dateVN}\n`;
-  csv += `Xuất lúc: ${new Date().toLocaleString('vi-VN')}\n\n`;
-  csv += 'STT,Mã đơn,Thời gian,Khách hàng,Điện thoại,Địa chỉ,Sản phẩm,Số lượng,Thanh toán,Tổng tiền,Trạng thái\n';
-
-  orders.forEach((o,i) => {
-    const a    = o.address || {};
-    const addr = [a.street,a.ward,a.dist,a.city].filter(Boolean).join(' ') || '–';
-    const time = new Date(o.date).toLocaleString('vi-VN');
-    const items = (o.items||[]).map(it=>it.name).join(' | ');
-    const qty   = (o.items||[]).reduce((s,it)=>s+it.qty, 0);
-    const row   = [
-      i+1,
+  const rows = orders.map((o, i) => {
+    const a     = o.address || {};
+    const addr  = [a.street, a.ward, a.dist, a.city].filter(Boolean).join(', ') || '–';
+    const time  = new Date(o.date).toLocaleString('vi-VN');
+    const items = (o.items||[]).map(it => `${it.name} x${it.qty}`).join(' | ');
+    const qty   = (o.items||[]).reduce((s,it) => s + it.qty, 0);
+    return [
+      i + 1,
       o.code,
       time,
-      `"${a.name||o.user||''}"`,
-      a.phone||'',
-      `"${addr}"`,
-      `"${items}"`,
+      a.name || o.userName || o.user || '–',
+      a.phone || '–',
+      addr,
+      items,
       qty,
-      PM_NAMES[o.payment]||o.payment||'',
+      PM_NAMES[o.payment] || o.payment || '–',
       o.total,
-      o.status||''
+      o.status || '–'
     ];
-    csv += row.join(',') + '\n';
   });
 
-  /* Tổng kết */
-  const revenue = orders.filter(o=>o.status!=='Đã huỷ').reduce((s,o)=>s+o.total,0);
-  csv += `\nTổng đơn:,${orders.length}\n`;
-  csv += `Đã giao:,${orders.filter(o=>o.status==='Đã giao').length}\n`;
-  csv += `Đã huỷ:,${orders.filter(o=>o.status==='Đã huỷ').length}\n`;
-  csv += `Doanh thu:,"${Number(revenue).toLocaleString('vi-VN')}₫"\n`;
+  const revenue = orders.filter(o => o.status !== 'Đã huỷ').reduce((s,o) => s + o.total, 0);
 
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = `HoaDon_${dateStr}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
+  const wsData = [
+    [`BÁO CÁO ĐƠN HÀNG NGÀY ${dateVN}`],
+    [`Xuất lúc: ${new Date().toLocaleString('vi-VN')}`],
+    [],
+    HEADERS,
+    ...rows,
+    [],
+    ['Tổng đơn:', orders.length],
+    ['Đã giao:',  orders.filter(o => o.status === 'Đã giao').length],
+    ['Đã huỷ:',  orders.filter(o => o.status === 'Đã huỷ').length],
+    ['Doanh thu (₫):', revenue],
+  ];
+
+  const ws = window.XLSX.utils.aoa_to_sheet(wsData);
+
+  /* Tự động căn độ rộng cột theo nội dung dài nhất */
+  const allRows = [HEADERS, ...rows];
+  ws['!cols'] = HEADERS.map((_, ci) => {
+    const maxLen = allRows.reduce((max, row) => {
+      const val = row[ci] !== undefined ? String(row[ci]) : '';
+      return Math.max(max, val.length);
+    }, HEADERS[ci].length);
+    return { wch: Math.min(maxLen + 4, 60) };
+  });
+
+  /* Merge ô tiêu đề báo cáo */
+  ws['!merges'] = [
+    { s:{r:0,c:0}, e:{r:0,c:HEADERS.length-1} },
+    { s:{r:1,c:0}, e:{r:1,c:HEADERS.length-1} },
+  ];
+
+  const wb = window.XLSX.utils.book_new();
+  window.XLSX.utils.book_append_sheet(wb, ws, 'Đơn hàng');
+  window.XLSX.writeFile(wb, `HoaDon_${dateStr}.xlsx`);
+
   toast(`📊 Xuất Excel ${orders.length} đơn ngày ${dateVN}`);
 }
